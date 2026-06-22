@@ -103,7 +103,6 @@
     }
 
     </style>
-
 </head>
 
 <body>
@@ -147,41 +146,6 @@
             Academic Risk Monitoring System
         </div>
 
-    </div>
-
-</div>
-
-<script>
-document.getElementById("loginForm").addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
-    let role = document.getElementById("role").value;
-
-    if(role === "student" &&
-       username === "student" &&
-       password === "student123")
-    {
-        window.location.href = "student/index.html";
-    }
-    else if(role === "admin" &&
-            username === "admin" &&
-            password === "admin123")
-    {
-        window.location.href = "admin/admin_dashboard.html";
-    }
-    else
-    {
-        alert("Invalid Username or Password");
-    }
-
-});
-</script>
-
-</body>
-</html>
     </div>
 
 </div>
