@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+    <style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Segoe UI',sans-serif;
+    }
+
+    body{
+        background:linear-gradient(135deg,#0f172a,#111827,#1e293b);
+        color:#f8fafc;
+        min-height:100vh;
+    }
+
+    .container{
+        width:95%;
+        max-width:1400px;
+        margin:auto;
+        padding:30px;
+    }
+
+    h1{
+        text-align:center;
+        color:#ffffff;
+        margin-bottom:25px;
+        font-size:40px;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(12px);
+        border-radius:15px;
+        overflow:hidden;
+        box-shadow:0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    table th{
+        background:#2563eb;
+        color:white;
+        padding:15px;
+        font-size:15px;
+    }
+
+    table td{
+        padding:15px;
+        text-align:center;
+        color:#e2e8f0;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    table tr:hover{
+        background:rgba(255,255,255,0.05);
+    }
+
+    button{
+        background:linear-gradient(135deg,#2563eb,#7c3aed);
+        color:white;
+        border:none;
+        padding:10px 18px;
+        border-radius:10px;
+        cursor:pointer;
+        font-weight:600;
+        transition:.3s;
+    }
+
+    button:hover{
+        transform:translateY(-2px);
+        box-shadow:0 5px 15px rgba(124,58,237,0.4);
+    }
+
+    .details-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:20px;
+        margin-top:20px;
+    }
+
+    .box{
+        background:rgba(255,255,255,0.08);
+        padding:18px;
+        border-radius:12px;
+        border:1px solid rgba(255,255,255,0.08);
+        color:#f8fafc;
+    }
+
+    .prediction{
+        background:rgba(16,185,129,0.15);
+        border-left:5px solid #10b981;
+        color:#6ee7b7;
+        font-weight:600;
+    }
+
+    @media(max-width:992px){
+
+        .details-grid{
+            grid-template-columns:repeat(2,1fr);
+        }
+
+    }
+
+    @media(max-width:768px){
+
+        .details-grid{
+            grid-template-columns:1fr;
+        }
+
+        table{
+            display:block;
+            overflow-x:auto;
+        }
+
+        h1{
+            font-size:28px;
+        }
+
+    }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <h1>Student Dropout Risk Dashboard</h1>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Attendance</th>
+                <th>Prediction</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for student in students %}
+
+            <tr>
+
+                <td>{{ student.id }}</td>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.course_code }}</td>
+                <td>{{ student.attendance_rate }}</td>
+                <td>{{ student.prediction }}</td>
+
+                <td>
+                    <button onclick="toggleDetails('{{ student.id }}')">
+                        View
+                    </button>
+                </td>
+
+            </tr>
+
+            <tr id="details{{ student.id }}" style="display:none;">
+                <td colspan="6">
+
+                    <div class="details-grid">
+
+                        <div class="box">Previous Qualification Grade: {{ student.previous_qualification_grade }}</div>
+
+                        <div class="box">Admission Grade: {{ student.admission_grade }}</div>
+
+                        <div class="box">Tuition Fees Up To Date: {{ student.tuition_fees_up_to_date }}</div>
+
+                        <div class="box">Gender: {{ student.gender }}</div>
+
+                        <div class="box">Age At Enrollment: {{ student.age_at_enrollment }}</div>
+
+                        <div class="box">Scholarship Holder: {{ student.scholarship_holder }}</div>
+
+                        <div class="box">Debtor: {{ student.debtor }}</div>
+
+                        <div class="box">1st Sem Enrolled: {{ student.units_1st_sem_enrolled }}</div>
+
+                        <div class="box">1st Sem Approved: {{ student.units_1st_sem_approved }}</div>
+
+                        <div class="box">1st Sem Grade: {{ student.units_1st_sem_grade }}</div>
+
+                        <div class="box">2nd Sem Enrolled: {{ student.units_2nd_sem_enrolled }}</div>
+
+                        <div class="box">2nd Sem Approved: {{ student.units_2nd_sem_approved }}</div>
+
+                        <div class="box">2nd Sem Grade: {{ student.units_2nd_sem_grade }}</div>
+
+                        <div class="box">Withdrawal Rate: {{ student.withdrawal_rate }}</div>
+
+                        <div class="box">GPA Trend: {{ student.gpa_trend }}</div>
+
+                        <div class="box">Approval Ratio: {{ student.approval_ratio }}</div>
+
+                        <div class="box">Attendance Rate: {{ student.attendance_rate }}</div>
+
+                        <div class="box">Engagement Score: {{ student.engagement_score }}</div>
+
+                        <div class="box prediction">
+                            Prediction: {{ student.prediction }}
+                        </div>
+
+                    </div>
+
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+function toggleDetails(id){
+    let row = document.getElementById("details" + id);
+
+    if(row.style.display === "none"){
+        row.style.display = "table-row";
+    }else{
+        row.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

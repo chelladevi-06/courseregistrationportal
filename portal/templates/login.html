@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration Portal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Poppins',sans-serif;
+    }
+
+    body{
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#2563eb,#7c3aed);
+    }
+
+    .login-container{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .login-box{
+        width:420px;
+        padding:40px;
+        background:rgba(255,255,255,0.15);
+        backdrop-filter:blur(12px);
+        border-radius:20px;
+        box-shadow:0 8px 32px rgba(0,0,0,0.2);
+        color:white;
+    }
+
+    .logo{
+        text-align:center;
+        font-size:60px;
+        margin-bottom:10px;
+    }
+
+    .login-box h1{
+        text-align:center;
+        margin-bottom:8px;
+        font-size:30px;
+    }
+
+    .subtitle{
+        text-align:center;
+        margin-bottom:30px;
+        opacity:0.9;
+    }
+
+    .input-group{
+        margin-bottom:18px;
+    }
+
+    .input-group label{
+        display:block;
+        margin-bottom:6px;
+        font-weight:500;
+    }
+
+    .input-group input,
+    .input-group select{
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        font-size:15px;
+    }
+
+    button{
+        width:100%;
+        padding:14px;
+        border:none;
+        border-radius:10px;
+        background:white;
+        color:#2563eb;
+        font-size:16px;
+        font-weight:600;
+        cursor:pointer;
+    }
+
+    button:hover{
+        transform:translateY(-2px);
+    }
+
+    .footer{
+        text-align:center;
+        margin-top:20px;
+        font-size:13px;
+        opacity:0.8;
+    }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-box">
+
+        <div class="logo">🎓</div>
+
+        <h1>Course Registration Portal</h1>
+
+        <p class="subtitle">Student Dropout Prediction System</p>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <div class="input-group">
+                <label>Select Role</label>
+                <select id="role" required>
+                    <option value="">Choose Role</option>
+                    <option value="student">Student</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <div class="footer">
+            Academic Risk Monitoring System
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let role = document.getElementById("role").value;
+
+    if(role === "student" &&
+       username === "student" &&
+       password === "student123")
+    {
+        window.location.href = "student/index.html";
+    }
+    else if(role === "admin" &&
+            username === "admin" &&
+            password === "admin123")
+    {
+        window.location.href = "admin/admin_dashboard.html";
+    }
+    else
+    {
+        alert("Invalid Username or Password");
+    }
+
+});
+</script>
+
+</body>
+</html>
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let role = document.getElementById("role").value;
+
+    if(role === "student" &&
+       username === "student" &&
+       password === "student123")
+    {
+        window.location.href = "{% url 'student' %}";
+    }
+    else if(role === "admin" &&
+            username === "admin" &&
+            password === "admin123")
+    {
+        window.location.href = "{% url 'admin_dashboard' %}";
+    }
+    else
+    {
+        alert("Invalid Username or Password");
+    }
+
+});
+
+</script>
+
+</body>
+</html>
