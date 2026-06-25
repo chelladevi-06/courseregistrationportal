@@ -166,7 +166,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
     {
         window.location.href = "{% url 'student' %}";
     }
-    else if(role === "admin" &&
+    if(role === "admin" &&
             username === "admin" &&
             password === "admin123")
     {

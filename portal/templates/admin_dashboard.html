@@ -140,97 +140,157 @@
 
     <h1>Student Dropout Risk Dashboard</h1>
 
-    <table>
+<form method="POST" action="{% url 'admin_dashboard' %}" class="prediction-form">
+{% csrf_token %}
 
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Course</th>
-                <th>Attendance</th>
-                <th>Prediction</th>
-                <th>Details</th>
-            </tr>
-        </thead>
+<div class="details-grid">
 
-        <tbody>
+<div class="box">
+<label>Student Name</label>
+<input type="text" name="student_name" required>
+</div>
 
-            {% for student in students %}
+<div class="box">
+<label>Course Code</label>
+<input type="number" name="course_code" required>
+</div>
 
-            <tr>
+<div class="box">
+<label>Previous Qualification Grade</label>
+<input type="number" step="0.01" name="previous_qualification_grade" required>
+</div>
 
-                <td>{{ student.id }}</td>
-                <td>{{ student.student_name }}</td>
-                <td>{{ student.course_code }}</td>
-                <td>{{ student.attendance_rate }}</td>
-                <td>{{ student.prediction }}</td>
+<div class="box">
+<label>Admission Grade</label>
+<input type="number" step="0.01" name="admission_grade" required>
+</div>
 
-                <td>
-                    <button onclick="toggleDetails('{{ student.id }}')">
-                        View
-                    </button>
-                </td>
+<div class="box">
+<label>Tuition Fees Up To Date</label>
+<select name="tuition_fees_up_to_date">
+<option value="1">Yes</option>
+<option value="0">No</option>
+</select>
+</div>
 
-            </tr>
+<div class="box">
+<label>Gender</label>
+<select name="gender">
+<option value="1">Male</option>
+<option value="0">Female</option>
+</select>
+</div>
 
-            <tr id="details{{ student.id }}" style="display:none;">
-                <td colspan="6">
+<div class="box">
+<label>Age At Enrollment</label>
+<input type="number" name="age_at_enrollment" required>
+</div>
 
-                    <div class="details-grid">
+<div class="box">
+<label>Scholarship Holder</label>
+<select name="scholarship_holder">
+<option value="1">Yes</option>
+<option value="0">No</option>
+</select>
+</div>
 
-                        <div class="box">Previous Qualification Grade: {{ student.previous_qualification_grade }}</div>
+<div class="box">
+<label>Debtor</label>
+<select name="debtor">
+<option value="1">Yes</option>
+<option value="0">No</option>
+</select>
+</div>
 
-                        <div class="box">Admission Grade: {{ student.admission_grade }}</div>
+<div class="box">
+<label>1st Sem Enrolled Units</label>
+<input type="number" name="units_1st_sem_enrolled" required>
+</div>
 
-                        <div class="box">Tuition Fees Up To Date: {{ student.tuition_fees_up_to_date }}</div>
+<div class="box">
+<label>1st Sem Approved Units</label>
+<input type="number" name="units_1st_sem_approved" required>
+</div>
 
-                        <div class="box">Gender: {{ student.gender }}</div>
+<div class="box">
+<label>1st Sem Grade</label>
+<input type="number" step="0.01" name="units_1st_sem_grade" required>
+</div>
 
-                        <div class="box">Age At Enrollment: {{ student.age_at_enrollment }}</div>
+<div class="box">
+<label>2nd Sem Enrolled Units</label>
+<input type="number" name="units_2nd_sem_enrolled" required>
+</div>
 
-                        <div class="box">Scholarship Holder: {{ student.scholarship_holder }}</div>
+<div class="box">
+<label>2nd Sem Approved Units</label>
+<input type="number" name="units_2nd_sem_approved" required>
+</div>
 
-                        <div class="box">Debtor: {{ student.debtor }}</div>
+<div class="box">
+<label>2nd Sem Grade</label>
+<input type="number" step="0.01" name="units_2nd_sem_grade" required>
+</div>
 
-                        <div class="box">1st Sem Enrolled: {{ student.units_1st_sem_enrolled }}</div>
+<div class="box">
+<label>Withdrawal Rate</label>
+<input type="number" step="0.01" name="withdrawal_rate" required>
+</div>
 
-                        <div class="box">1st Sem Approved: {{ student.units_1st_sem_approved }}</div>
+<div class="box">
+<label>GPA Trend</label>
+<input type="number" step="0.01" name="gpa_trend" required>
+</div>
 
-                        <div class="box">1st Sem Grade: {{ student.units_1st_sem_grade }}</div>
+<div class="box">
+<label>Approval Ratio</label>
+<input type="number" step="0.01" name="approval_ratio" required>
+</div>
 
-                        <div class="box">2nd Sem Enrolled: {{ student.units_2nd_sem_enrolled }}</div>
+<div class="box">
+<label>Attendance Rate</label>
+<input type="number" step="0.01" name="attendance_rate" required>
+</div>
 
-                        <div class="box">2nd Sem Approved: {{ student.units_2nd_sem_approved }}</div>
-
-                        <div class="box">2nd Sem Grade: {{ student.units_2nd_sem_grade }}</div>
-
-                        <div class="box">Withdrawal Rate: {{ student.withdrawal_rate }}</div>
-
-                        <div class="box">GPA Trend: {{ student.gpa_trend }}</div>
-
-                        <div class="box">Approval Ratio: {{ student.approval_ratio }}</div>
-
-                        <div class="box">Attendance Rate: {{ student.attendance_rate }}</div>
-
-                        <div class="box">Engagement Score: {{ student.engagement_score }}</div>
-
-                        <div class="box prediction">
-                            Prediction: {{ student.prediction }}
-                        </div>
-
-                    </div>
-
-                </td>
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
-    </table>
+<div class="box">
+<label>Engagement Score</label>
+<input type="number" step="0.01" name="engagement_score" required>
+</div>
 
 </div>
 
+<br>
+
+<button type="submit">
+Predict 
+</button>
+
+</form>
+
+<br>
+{% if prediction %}
+<div class="result-box">
+    <h3>Prediction: {{ prediction }}</h3>
+</div>
+{% endif %}
+<table>
+<tr>
+    <th>Student Name</th>
+    <th>Course Code</th>
+    <th>Attendance Rate</th>
+    <th>Prediction</th>
+</tr>
+
+{% for s in students %}
+<tr>
+    <td>{{ s.student_name }}</td>
+    <td>{{ s.course_code }}</td>
+    <td>{{ s.attendance_rate }}</td>
+    <td>{{ s.prediction }}</td>
+</tr>
+{% endfor %}
+</table>
+   
 <script>
 function toggleDetails(id){
     let row = document.getElementById("details" + id);
