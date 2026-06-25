@@ -133,7 +133,6 @@
                 <label>Select Role</label>
                 <select id="role" required>
                     <option value="">Choose Role</option>
-                    <option value="student">Student</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>
@@ -164,7 +163,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e){
        username === "student" &&
        password === "student123")
     {
-        window.location.href = "{% url 'student' %}";
+        window.location.href = "{% url 'admin_dashboard' %}";
     }
     if(role === "admin" &&
             username === "admin" &&
